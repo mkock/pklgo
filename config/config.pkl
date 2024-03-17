@@ -1,0 +1,30 @@
+@go.Package { name = "github.com/mkock/pklgo/config" }
+@go.Name { value = "appConfig" }
+
+module github.mkock.Config
+
+import "package://pkg.pkl-lang.org/pkl-go/pkl.golang@0.6.0#/go.pkl"
+
+class Config {
+    appName: String
+    appVersion: String
+
+    database: Database
+}
+
+class Database {
+    dsn: String
+    driver: String
+    maxIdleConns: Int
+}
+
+appConfig: Config = new {
+    appName = "pklgo"
+    appVersion = "0.0.1"
+
+    database {
+        dsn = "user:password@tcp(localhost:3306)/dbname?charset=utf8mb4&parseTime=True&loc=Local"
+        driver = "mysql"
+        maxIdleConns = 10
+    }
+}
